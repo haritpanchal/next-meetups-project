@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import MeetupList from "../components/meetups/MeetupList";
-
+import { useState, useEffect } from "react";
 const DUMMY_MEETUPS = [
   {
     id: "m1",
@@ -11,7 +10,7 @@ const DUMMY_MEETUPS = [
     description: "This is the first meetup",
   },
   {
-    id: "m1",
+    id: "m2",
     title: "Second Meetup",
     image:
       "https://images.unsplash.com/photo-1661074578833-59d16206fc7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80",
@@ -20,11 +19,12 @@ const DUMMY_MEETUPS = [
   },
 ];
 const index = () => {
-  return (
-    <Fragment>
-      <MeetupList meetups={DUMMY_MEETUPS} />
-    </Fragment>
-  );
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
+  useEffect(() => {
+    setLoadedMeetups(DUMMY_MEETUPS);
+  }, []);
+
+  return <MeetupList meetups={loadedMeetups} />;
 };
 
 export default index;
