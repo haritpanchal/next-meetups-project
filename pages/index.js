@@ -18,13 +18,22 @@ const DUMMY_MEETUPS = [
     description: "This is the second meetup",
   },
 ];
-const index = () => {
+const index = (props) => {
   const [loadedMeetups, setLoadedMeetups] = useState([]);
   useEffect(() => {
     setLoadedMeetups(DUMMY_MEETUPS);
   }, []);
 
-  return <MeetupList meetups={loadedMeetups} />;
+  return <MeetupList meetups={props.meetups} />;
 };
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 10, // page will be regenerated every 10 seconds
+  };
+}
 
 export default index;
